@@ -8,7 +8,7 @@ class JsonObjectPrinter [T <: Tuple] (fields: Tuple.Map[T, JsonFieldPrinter]) ex
   override def run (generator: JsonGenerator, path: JsonPath, options: JsonPrinter.Options): T => Unit = { tuple =>
     generator.writeStartObject()
 
-    TupleUtil.tupleMapTransform [[t] =>> (t, JsonFieldPrinter[t]), [t] =>> Unit, T] (TupleUtil.zipSameOrigin(tuple, fields)) { [t] => (pair: (t, JsonFieldPrinter[t])) =>
+    TupleUtil.tupleMapTransform [T, [t] =>> (t, JsonFieldPrinter[t]), [t] =>> Unit] (TupleUtil.zipSameOrigin(tuple, fields)) { [t] => (pair: (t, JsonFieldPrinter[t])) =>
       pair._2.run(generator, path, options)(pair._1)
     }
 
