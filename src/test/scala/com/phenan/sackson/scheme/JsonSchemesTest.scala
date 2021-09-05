@@ -1,27 +1,10 @@
 package com.phenan.sackson.scheme
 
-import com.fasterxml.jackson.core.JsonFactory
 import com.phenan.sackson.parser.{JsonParseError, JsonParser}
-import com.phenan.sackson.path.JsonPath
 import com.phenan.sackson.printer.JsonPrinter
 import org.scalatest.wordspec.AnyWordSpec
 
-import java.io.ByteArrayOutputStream
-
 class JsonSchemesTest extends AnyWordSpec {
-  private val jsonFactory = new JsonFactory()
-
-  private def runPrinter[T](printer: JsonPrinter[T], value: T): String = {
-    val stream = new ByteArrayOutputStream()
-    val generator = jsonFactory.createGenerator(stream).nn
-    val options = JsonPrinter.Options()
-    printer.run(generator, JsonPath.Root, options)(value)
-    generator.flush()
-    val result = stream.toString
-    stream.close()
-    result
-  }
-
   import JsonSchemes._
 
   private val singleFieldStruct = struct {
@@ -40,10 +23,10 @@ class JsonSchemesTest extends AnyWordSpec {
 
   "singleFieldStruct.printer" should {
     "print empty object for None" in {
-      assert(runPrinter(singleFieldStruct.printer, Tuple(None)) == """{}""")
+      assert(singleFieldStruct.printer.printString(Tuple(None)) == """{}""")
     }
     "print single field object for Some(true)" in {
-      assert(runPrinter(singleFieldStruct.printer, Tuple(Some(true))) == """{"b":true}""")
+      assert(singleFieldStruct.printer.printString(Tuple(Some(true))) == """{"b":true}""")
     }
   }
 
@@ -64,10 +47,10 @@ class JsonSchemesTest extends AnyWordSpec {
 
   "structWith2Fields.printer" should {
     "print single field object for (true, None)" in {
-      assert(runPrinter(structWith2Fields.printer, (true, None)) == """{"b1":true}""")
+      assert(structWith2Fields.printer.printString((true, None)) == """{"b1":true}""")
     }
     "print two fields object for (true, Some(false))" in {
-      assert(runPrinter(structWith2Fields.printer, (true, Some(false))) == """{"b1":true,"b2":false}""")
+      assert(structWith2Fields.printer.printString((true, Some(false))) == """{"b1":true,"b2":false}""")
     }
   }
 }
