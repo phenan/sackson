@@ -8,6 +8,10 @@ ThisBuild / organizationName := "phenan"
 lazy val root = (project in file("."))
   .settings(
     name := "sackson",
+    scalacOptions ++= Seq(
+      "-Yexplicit-nulls",
+      "-Ysafe-init"
+    ),
     libraryDependencies ++= Seq(
       jacksonCore,
       scalaTest
