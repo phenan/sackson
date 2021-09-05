@@ -3,6 +3,8 @@ package com.phenan.sackson.parser
 import com.fasterxml.jackson.core.{JsonFactory, JsonParser as JacksonParser}
 import com.phenan.sackson.path.JsonPath
 
+import scala.util.Using
+
 trait JsonParser [T] { self =>
   private[parser] def run (parser: JacksonParser, path: JsonPath, options: JsonParser.Options): Either[JsonParseError, T]
 
@@ -11,7 +13,9 @@ trait JsonParser [T] { self =>
   }
 
   def parseString (string: String, options: JsonParser.Options = JsonParser.Options(), factory: JsonParser.JacksonParserFactory = JsonParser.defaultFactory): Either[JsonParseError, T] = {
-    run(factory.fromString(string), options)
+    factory.withParserFromString(string) { parser =>
+      run(parser, options)
+    }
   }
 
   def const (value: T): JsonParser[Unit] = (parser: JacksonParser, path: JsonPath, options: JsonParser.Options) => {
@@ -30,10 +34,11 @@ object JsonParser {
   case class Options ()
 
   class JacksonParserFactory (jsonFactory: JsonFactory) {
-    def fromString(string: String): JacksonParser = {
-      val parser = jsonFactory.createParser(string).nn
-      parser.nextToken()
-      parser
+    def withParserFromString[T](string: String)(f: JacksonParser => T): T = {
+      Using(jsonFactory.createParser(string).nn) { parser =>
+        parser.nextToken()
+        f(parser)
+      }.get
     }
   }
 
