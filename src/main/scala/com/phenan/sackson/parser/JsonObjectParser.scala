@@ -49,7 +49,7 @@ class JsonObjectParser [T <: Tuple] (fields: Tuple.Map[T, JsonFieldParser]) exte
       parser.nextToken()
       fieldMap.get(fieldName) match {
         case Some((fieldParser, index)) =>
-          fieldParser.parser.run(parser, path, options) match {
+          fieldParser.parser.run(parser, path.field(fieldName), options) match {
             case Left(error) =>
               Left(error)
             case Right(value) =>
@@ -57,7 +57,7 @@ class JsonObjectParser [T <: Tuple] (fields: Tuple.Map[T, JsonFieldParser]) exte
               readRep(fieldValueArray, parser, path, options)
           }
         case None =>
-          skipFieldValue(parser, path, options) match {
+          skipFieldValue(parser, path.field(fieldName), options) match {
             case Left(error) =>
               Left(error)
             case Right(_) =>
