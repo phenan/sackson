@@ -1,6 +1,6 @@
 # sackson
 
-High level Jackson wrapper in Scala3.
+Sackson generates statically typed JSON parser and printer from JSON scheme defined in Scala without macros.
 
 ## Usage
 
@@ -13,8 +13,8 @@ val myScheme = struct {
   nil
 }
 
-val parser = myScheme.parser
-val printer = myScheme.printer
+val parsed = myScheme.parser.parseString("""{"b1":true,"b2":false}""")  // Right((true, Some(false)))
+val printed = myScheme.printer.printString((true, Some(false)))         // {"b1":true,"b2":false}
 ```
 
 ## Author
