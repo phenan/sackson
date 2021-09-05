@@ -2,7 +2,7 @@ package com.phenan.sackson.parser
 
 object JsonParsers {
   val boolean: JsonParser[Boolean] = PrimitiveParsers.BooleanParser
-  //val int: JsonParser[Int] = ???
+  val int: JsonParser[Int] = PrimitiveParsers.IntParser
   //val double: JsonParser[Double] = ???
   //val string: JsonParser[String] = ???
 

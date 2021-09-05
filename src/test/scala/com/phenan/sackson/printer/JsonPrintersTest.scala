@@ -15,6 +15,15 @@ class JsonPrintersTest extends AnyWordSpec {
     }
   }
 
+  "int" should {
+    "print 0" in {
+      assert(int.printString(0) == "0")
+    }
+    "print negative integer" in {
+      assert(int.printString(-448) == "-448")
+    }
+  }
+
   private val singleFieldStruct = struct {
     optional("b", boolean) *:
       nil

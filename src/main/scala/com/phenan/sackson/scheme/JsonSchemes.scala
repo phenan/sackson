@@ -2,7 +2,7 @@ package com.phenan.sackson.scheme
 
 object JsonSchemes {
   val boolean: JsonScheme[Boolean] = PrimitiveSchemes.BooleanScheme
-  //val int: JsonScheme[Int] = ???
+  val int: JsonScheme[Int] = PrimitiveSchemes.IntScheme
   //val double: JsonScheme[Double] = ???
   //val string: JsonScheme[String] = ???
 

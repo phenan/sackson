@@ -20,6 +20,18 @@ class JsonParsersTest extends AnyWordSpec {
     }
   }
 
+  "int" should {
+    "parse 0" in {
+      assert(int.parseString("0") == Right(0))
+    }
+    "parse negative number" in {
+      assert(int.parseString("-134") == Right(-134))
+    }
+    "parse stringified integer value" in {
+      assert(int.parseString(""""39"""") == Right(39))
+    }
+  }
+
   private val singleFieldStruct = struct {
     optional("b", boolean) *:
       nil

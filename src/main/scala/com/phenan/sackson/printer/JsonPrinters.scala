@@ -5,7 +5,7 @@ import com.phenan.sackson.path.JsonPath
 
 object JsonPrinters {
   val boolean: JsonPrinter[Boolean] = PrimitivePrinters.BooleanPrinter
-  //val int: JsonPrinter[Int] = ???
+  val int: JsonPrinter[Int] = PrimitivePrinters.IntPrinter
   //val double: JsonPrinter[Double] = ???
   //val string: JsonPrinter[String] = ???
 
