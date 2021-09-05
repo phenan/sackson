@@ -19,8 +19,8 @@ trait JsonScheme [T] { self =>
   def const (value: T): JsonScheme[Unit] = new JsonScheme[Unit] {
     override def parser: JsonParser[Unit] = self.parser.const(value)
     override def printer: JsonPrinter[Unit] = self.printer.const(value)
-    override def schema: JsonPrinter[Unit] = struct(
+    override def schema: JsonPrinter[Unit] = ???/*struct(
       required("enum") -> array(self).const(Seq(value))
-    ).printer
+    ).printer*/
   }
 }
