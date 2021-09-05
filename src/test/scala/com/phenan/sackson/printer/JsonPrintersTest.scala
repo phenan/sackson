@@ -11,7 +11,7 @@ class JsonPrintersTest extends AnyWordSpec {
 
   private def runPrinter[T](printer: JsonPrinter[T], value: T): String = {
     val stream = new ByteArrayOutputStream()
-    val generator = jsonFactory.createGenerator(stream)
+    val generator = jsonFactory.createGenerator(stream).nn
     val options = JsonPrinter.Options()
     printer.run(generator, JsonPath.Root, options)(value)
     generator.flush()
