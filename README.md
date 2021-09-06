@@ -1,5 +1,7 @@
 # sackson
 
+[![Scala CI](https://github.com/phenan/sackson/actions/workflows/scala.yml/badge.svg)](https://github.com/phenan/sackson/actions/workflows/scala.yml)
+
 Sackson generates statically typed JSON parser and printer from JSON scheme defined in Scala without macros.
 
 ## Usage
