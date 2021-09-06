@@ -15,4 +15,10 @@ object PrimitivePrinters {
       generator.writeNumber
     }
   }
+
+  object StringPrinter extends JsonPrinter[String] {
+    override private[printer] def run(generator: JsonGenerator, path: JsonPath, options: JsonPrinter.Options): String => Unit = {
+      generator.writeString
+    }
+  }
 }

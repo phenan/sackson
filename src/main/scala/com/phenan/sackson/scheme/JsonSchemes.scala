@@ -4,7 +4,7 @@ object JsonSchemes {
   val boolean: JsonScheme[Boolean] = PrimitiveSchemes.BooleanScheme
   val int: JsonScheme[Int] = PrimitiveSchemes.IntScheme
   //val double: JsonScheme[Double] = ???
-  //val string: JsonScheme[String] = ???
+  val string: JsonScheme[String] = PrimitiveSchemes.StringScheme
 
   def array[T](scheme: JsonScheme[T]): JsonScheme[Seq[T]] = ???
 

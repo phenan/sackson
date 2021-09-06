@@ -39,4 +39,17 @@ object PrimitiveParsers {
       }
     }
   }
+
+  object StringParser extends JsonParser[String] {
+    override private[parser] def run(parser: JacksonParser, path: JsonPath, options: JsonParser.Options): Either[JsonParseError, String] = {
+      val currentToken = parser.currentToken()
+      if (currentToken == JsonToken.VALUE_STRING) {
+        val string = parser.getText.nn
+        parser.nextToken()
+        Right(string)
+      } else {
+        Left(JsonParseError("string", currentToken, path))
+      }
+    }
+  }
 }

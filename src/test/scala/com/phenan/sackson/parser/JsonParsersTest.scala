@@ -32,6 +32,18 @@ class JsonParsersTest extends AnyWordSpec {
     }
   }
 
+  "string" should {
+    "parse empty string" in {
+      assert(string.parseString("""""""") == Right(""))
+    }
+    "parse non-empty string" in {
+      assert(string.parseString(""""test"""") == Right("test"))
+    }
+    "parse string including escaped double quote" in {
+      assert(string.parseString(""""\"\""""") == Right(""""""""))
+    }
+  }
+
   private val singleFieldStruct = struct {
     optional("b", boolean) *:
       nil

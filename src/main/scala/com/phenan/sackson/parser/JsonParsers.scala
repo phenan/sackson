@@ -4,7 +4,7 @@ object JsonParsers {
   val boolean: JsonParser[Boolean] = PrimitiveParsers.BooleanParser
   val int: JsonParser[Int] = PrimitiveParsers.IntParser
   //val double: JsonParser[Double] = ???
-  //val string: JsonParser[String] = ???
+  val string: JsonParser[String] = PrimitiveParsers.StringParser
 
   def array[T](scheme: JsonParser[T]): JsonParser[Seq[T]] = ???
 

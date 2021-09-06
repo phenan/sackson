@@ -7,7 +7,7 @@ object JsonPrinters {
   val boolean: JsonPrinter[Boolean] = PrimitivePrinters.BooleanPrinter
   val int: JsonPrinter[Int] = PrimitivePrinters.IntPrinter
   //val double: JsonPrinter[Double] = ???
-  //val string: JsonPrinter[String] = ???
+  val string: JsonPrinter[String] = PrimitivePrinters.StringPrinter
 
   def array[T](scheme: JsonPrinter[T]): JsonPrinter[Seq[T]] = ???
 

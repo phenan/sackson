@@ -24,6 +24,18 @@ class JsonPrintersTest extends AnyWordSpec {
     }
   }
 
+  "string" should {
+    "print empty string" in {
+      assert(string.printString("") == """""""")
+    }
+    "print non empty string" in {
+      assert(string.printString("foo bar") == """"foo bar"""")
+    }
+    "print escaped string" in {
+      assert(string.printString("""""""") == """"\"\""""")
+    }
+  }
+
   private val singleFieldStruct = struct {
     optional("b", boolean) *:
       nil

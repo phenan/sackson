@@ -23,4 +23,10 @@ object PrimitiveSchemes {
       *: nil
     ).printer.contraMap((_: Unit) => Tuple(()))*/
   }
+  
+  object StringScheme extends JsonScheme[String] {
+    override def parser: JsonParser[String] = PrimitiveParsers.StringParser
+    override def printer: JsonPrinter[String] = PrimitivePrinters.StringPrinter
+    override def schema: JsonPrinter[Unit] = ???
+  }
 }
