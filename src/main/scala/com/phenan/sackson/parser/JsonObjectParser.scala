@@ -24,8 +24,8 @@ class JsonObjectParser [T <: Tuple] (fields: Tuple.Map[T, JsonFieldParser]) exte
 
   private def prepareFieldValueArray = {
     fieldParserList.view.map {
-      case JsonFieldParser.Required(_, _) => null
       case JsonFieldParser.Optional(_, _) => None
+      case JsonFieldParser.Required(_, _) => null
     }.toArray[Any | Null]
   }
 
